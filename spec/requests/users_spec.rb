@@ -15,8 +15,8 @@ RSpec.describe "Users" do
         expect(response).to have_http_status(:created)
       end
 
-      it 'creates a new user' do
-        expect(User.count).to eq(1)
+      it 'creates a new user with that name' do
+        expect(User.all).to contain_exactly(have_attributes(name: name))
       end
 
       it 'returns JSON' do
@@ -36,7 +36,7 @@ RSpec.describe "Users" do
       end
       
       it 'does not create a new user' do
-        expect(User.count).to eq(0)
+        expect(User.all).to be_empty
       end
 
       it 'returns JSON' do
