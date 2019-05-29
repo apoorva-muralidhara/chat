@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "Users" do
   describe "POST /users" do
     let(:name) { 'Egbert' }
-    let(:valid_params) { { name: name, password: 'topsecret' } }
+    let(:password) { 'topsecret' }
+    let(:valid_params) { { name: name, password: password } }
     let(:invalid_params) { { name: name } }
 
     before { post '/users', params: params }
@@ -24,7 +25,7 @@ RSpec.describe "Users" do
       end
 
       it "returns a success message" do
-        expect(response.body).to match(/Successfully created user/)
+        expect(json).to include('message' => 'Successfully created user')
       end
     end
 
@@ -44,8 +45,12 @@ RSpec.describe "Users" do
       end
 
       it 'returns an error message' do
-        expect(response.body).to match(/Password can't be blank/)
+        expect(json).to include('message' => "Password can't be blank")
       end
+    end
+
+    def json
+      JSON.parse(response.body)
     end
   end
 end
