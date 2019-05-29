@@ -73,11 +73,6 @@ RSpec.describe "Authentications", type: :request do
     context 'when there is a user by that name' do
       let(:params) { valid_params }
 
-      let(:auth_token) do
-        JWT.encode({ user_id: user.id}, 
-                   Rails.application.secrets.secret_key_base)
-      end
-      
       it 'succeeds' do
         expect(response).to have_http_status(:created)
       end
@@ -87,7 +82,7 @@ RSpec.describe "Authentications", type: :request do
       end
       
       it 'returns an auth token' do
-        expect(json).to include('auth_token' => auth_token)
+        expect(json).to include('auth_token' => user.auth_token)
       end
     end
 
