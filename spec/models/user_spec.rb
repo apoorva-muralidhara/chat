@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe User do
   it { is_expected.to have_secure_password }
 
+  describe 'associations' do
+    it { is_expected.to have_many(:memberships).dependent(:destroy) }
+  end
+
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_uniqueness_of(:name) }
