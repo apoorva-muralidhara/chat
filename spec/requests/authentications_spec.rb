@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Authentications", type: :request do
+RSpec.describe "Authentications" do
   describe "POST /authentications" do
     let(:name) { 'Egbert' }
     let(:nonexistent_name) { 'IDoNotExistAtAll' }
