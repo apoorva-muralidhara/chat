@@ -34,6 +34,7 @@ gem 'jwt'
 group :test do
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'action-cable-testing'
 end
 
 group :development, :test do
